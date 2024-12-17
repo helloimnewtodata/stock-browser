@@ -1,3 +1,8 @@
+import os  # Lisää tämä rivi
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 INSTALLED_APPS = [
     
     'rest_framework',
@@ -34,7 +39,8 @@ ROOT_URLCONF = 'stock_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -48,3 +54,5 @@ TEMPLATES = [
 ]
 
 SECRET_KEY = 'your-secret-key-here'
+
+CORS_ALLOW_ALL_ORIGINS = True 

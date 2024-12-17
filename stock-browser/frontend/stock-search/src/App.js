@@ -11,19 +11,19 @@ function App() {
     const [stockData, setStockData] = useState(null);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-  
+
     const fetchStockData = async () => {
       if (!symbol) {
         setError('Syötä osakesymboli.');
         return;
       }
-  
+
       setLoading(true);
       setError('');
-  
+
       try {
         const response = await axios.get(`http://localhost:8000/api/search/?symbol=${symbol}`);
-        setStockData(response.data);
+        setStockData(response.data); // Tallenna saatu data
       } catch (err) {
         setError('Virhe haettaessa tietoja. Tarkista symboli ja yritä uudelleen.');
         setStockData(null);
@@ -31,7 +31,7 @@ function App() {
         setLoading(false);
       }
     };
-  
+
     return (
       <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -51,15 +51,19 @@ function App() {
             </div>
             {error && <p className="text-red-500 mb-5">{error}</p>}
             {stockData && (
-              <Card>
-                <h2>{stockData.name} ({stockData.symbol})</h2>
-                <p className="text-2xl font-bold">${stockData.price}</p>
+              <Card className="mb-4">
+                <h2 className="font-bold text-xl">{stockData.longName} ({stockData.symbol})</h2>
+                <p className="text-2xl font-bold">${stockData.currentPrice}</p>
+                <p><strong>Sector:</strong> {stockData.sector}</p>
+                <p><strong>Industry:</strong> {stockData.industry}</p>
+                <p><strong>Previous Close:</strong> ${stockData.previousClose}</p>
+                <p><strong>Market Cap:</strong> ${stockData.marketCap}</p>
               </Card>
             )}
           </div>
         </div>
       </div>
     );
-  }
-  
-  export default App;
+}
+
+export default App;
