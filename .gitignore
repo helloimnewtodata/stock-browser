@@ -1,0 +1,17 @@
+# Python-virtuaaliympäristö
+.venv/
+__pycache__/
+*.pyc
+
+# Djangon tietokanta (kehityksen aikana)
+db.sqlite3
+
+# IDE-asetukset
+.vscode/
+.idea/
+
+# Lokit
+*.log
+
+# Kätketyt ympäristömuuttujat
+.env
