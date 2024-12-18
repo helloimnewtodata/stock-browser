@@ -32,22 +32,35 @@ function App() {
       }
     };
 
+    const handleKeyDown = (e) => { // HAKU TOIMII MYÖS ENTERIÄ PAINAMALLA
+        console.log('Key pressed:', e.key);
+        if (e.key === 'Enter') {
+            fetchStockData();
+        }
+    };
+
     return (
       <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">
           <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
             <h1 className="text-3xl font-bold mb-5 text-center text-gray-900">Stock Search</h1>
             <div className="mb-5 flex space-x-2">
-              <Input
+
+              <input
                 type="text"
+                id="stock-symbol"
+                name="stock-symbol"
                 value={symbol}
                 onChange={(e) => setSymbol(e.target.value)}
+                onKeyDown={handleKeyDown} // HAKU TOIMII MYÖS ENTERIÄ PAINAMALLA
                 placeholder="Syötä osakesymboli (esim. AAPL)"
                 className="flex-grow"
               />
+
               <Button onClick={fetchStockData} disabled={loading}>
                 {loading ? 'Haetaan...' : 'Hae'}
               </Button>
+              
             </div>
             {error && <p className="text-red-500 mb-5">{error}</p>}
             {stockData && (
