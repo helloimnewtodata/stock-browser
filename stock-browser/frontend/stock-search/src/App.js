@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import PriceChart from './components/PriceChart';
 import Button from "./components/ui/button";
@@ -41,10 +41,6 @@ function App() {
         }
     };
 
-    useEffect(() => {
-        setStockData(null);
-    }, [symbol]);
-
     const formatStockData = (data) => {
         const history = data.history.map(item => ({
             date: item.Date,
@@ -83,7 +79,7 @@ function App() {
                     {stockData && stockData.info && (
                         <Card className="mb-4">
                             <h2 className="font-bold text-xl">{stockData.info.longName} ({stockData.info.symbol})</h2>
-                            <p className="text-2xl font-bold">${stockData.info.currentPrice || priceData[priceData.length - 1].close}</p>
+                            <p className="text-2xl font-bold">${stockData.info.currentPrice || priceData[priceData.length - 1]?.close}</p>
                             <p><strong>Sector:</strong> {stockData.info.sector}</p>
                             <p><strong>Industry:</strong> {stockData.info.industry}</p>
                             <p><strong>Previous Close:</strong> ${stockData.info.previousClose}</p>
