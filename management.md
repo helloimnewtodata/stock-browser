@@ -18,6 +18,3 @@ stock_project/settings.py: Määrittelee sovelluksen asetukset.
 
 stock_project/urls.py: Määrittelee sovelluksen URL-polut.
 
-stock_project/wsgi.py: Määrittelee WSGI-sovelluksen.
-
-stock_project/asgi.py: Määrittelee ASGI-sovelluksen.
